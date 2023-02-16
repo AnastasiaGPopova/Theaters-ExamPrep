@@ -1,0 +1,10 @@
+const Play = require('../models/Play')
+
+exports.getOnePlay = (playId) => Play.findById(playId)
+exports.getAllPlays = () => Play.find()
+exports.getLastAdded = () => Play.find({}).sort({createdAt: -1})
+exports.getSortedByLikes = () => Play.find({}).sort({usersLiked: -1})
+exports.update = (playId, data) => Play.findByIdAndUpdate(playId, data, {runValidators: true})
+exports.deletePlay = (playId) => Play.findByIdAndDelete(playId, {runValidators: true})
+exports.getSearchedbyType = (item) => Play.find({}).where('type').equals(`${item}`)
+exports.createNewPlay = (data) => Play.create(data)
